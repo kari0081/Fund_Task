@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'posts/styling.css' %}" type="text/css">
+
+    <title>Fundraiser</title>
+</head>
+
+<body>
+
+    <div class="card"><!-- action="/action_page.php">-->
+        <div class="card-header bg-primary">
+                    <h1 class="text-white">Community Fundraising</h1>
+        </div>
+  <div class="card-body">
+
+
+      <form id="frm1">
+        <div class="form-group"><label><strong>Fundraiser</strong></label><input type="text" class="form-control" id="fundraiserName" value="Fundraiser name"></div>
+    <div class="form-group"><label><strong>Amount Raised</strong></label><input type="number" class="form-control" id="amountRaised" value="10"></div>
+  </form>
+
+
+  </div>
+        <div class="card-footer">
+                  <button class="btn btn-primary" onclick="updateProgressBar()">Update progress</button>
+        </div>
+    </div>
+
+
+<br><br>
+<script>
+
+    var totalRaised = 0;
+    var totalGoal = 100;
+
+    function updateProgressBar(){
+        // store user input from Amount Raised textbox
+        var amountRaisedElement = document.getElementById("amountRaised");
+
+        if((totalRaised < totalGoal) && amountRaisedElement.value.length>0){
+            totalRaised = totalRaised + parseFloat(amountRaisedElement.value);
+
+            var total = (totalRaised / totalGoal) * 100;
+            var totalLeft = ((totalGoal - totalRaised) / totalGoal) * 100;
+
+            var raisedElement = document.getElementById("raised");
+            raisedElement.style.width = total + "%";
+            var leftElement = document.getElementById("left");
+            leftElement.style.width = totalLeft + "%";
+
+            //update text
+            var raisedTextElement = document.getElementById("raisedText");
+            raisedTextElement.innerText = total.toFixed(2);
+            var leftTextElement = document.getElementById("leftText");
+            leftTextElement.innerText = totalLeft.toFixed(2);
+
+            amountRaisedElement.value = '';
+
+        }
+    }
+</script>
+
+<div class="card-footer bg-primary">
+    <h4 align = center class="text-white">Progress Bar</h4>
+</div>
+
+  <div class="progress" style="height:50px">
+    <div id="raised" class="progress-bar bg-success" style="width:0%">
+      <strong>Raised <span id="raisedText"></span></strong>
+    </div>
+    <div id="left" class="progress-bar bg-danger" style="width:0%">
+        <strong>Left to goal <span id="leftText"></span></strong>
+    </div>
+  </div>
+
+
+</body>
+</html>
