@@ -1,0 +1,145 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>CodeUrrs</title>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+     {% load static %}
+    <link rel="stylesheet" href="{% static 'tasksapp/style.css' %}" type="text/css">
+     <title>Fundraiser</title>
+
+</head>
+  <body>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">School of
+            Health & Community Studies Fundraising</a>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#"><img src="{% static 'task/ac_logo.png' %}" width="50px"></a>
+            </li>
+        </ul>
+        <a class="nav-signout" href="{% url 'home' %}">Go Back</a>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'index' %}">
+                                <span data-feather="home"></span>
+                                Dashboard Main<span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                            <a class="nav-link" href="fundraising.html">
+                                <span data-feather="bar-chart-2"></span>
+                                Fundraising
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </nav>
+
+
+        </div>
+    </div>
+
+
+ <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+     <div class="card" width="100%"><!-- action="/action_page.php">-->
+        <div class="card-header bg-primary">
+                    <h1 class="text-white">Community Fundraising</h1>
+        </div>
+  <div class="card-body">
+       <form id="frm1">
+        <div class="form-group"><label><strong>Fundraiser</strong></label><input type="text" class="form-control" id="fundraiserName"></div>
+    <div class="form-group"><label><strong>Amount Raised</strong></label><input type="number" class="form-control" id="amountRaised"></div>
+  </form>
+   </div>
+        <div class="card-footer">
+                  <button class="btn btn-primary" onclick="updateProgressBar()">Update progress</button>
+        </div>
+    </div>
+ <br><br>
+<script>
+     var totalRaised = 0;
+    var totalGoal = 100;
+     function updateProgressBar(){
+        // store user input from Amount Raised textbox
+        var amountRaisedElement = document.getElementById("amountRaised");
+         if((totalRaised < totalGoal) && amountRaisedElement.value.length>0){
+            totalRaised = totalRaised + parseFloat(amountRaisedElement.value);
+             var total = (totalRaised / totalGoal) * 100;
+            var totalLeft = ((totalGoal - totalRaised) / totalGoal) * 100;
+             var raisedElement = document.getElementById("raised");
+            raisedElement.style.width = total + "%";
+            var leftElement = document.getElementById("left");
+            leftElement.style.width = totalLeft + "%";
+             //update text
+            var raisedTextElement = document.getElementById("raisedText");
+            raisedTextElement.innerText = total.toFixed(2);
+            var leftTextElement = document.getElementById("leftText");
+            leftTextElement.innerText = totalLeft.toFixed(2);
+             amountRaisedElement.value = '';
+         }
+    }
+</script>
+ <div class="card-footer bg-primary">
+    <h4 align = center class="text-white">Progress Bar</h4>
+</div>
+   <div class="progress" style="height:50px">
+    <div id="raised" class="progress-bar bg-success" style="width:0%">
+      <strong>Raised <span id="raisedText"></span></strong>
+    </div>
+    <div id="left" class="progress-bar bg-danger" style="width:0%">
+        <strong>Left to goal <span id="leftText"></span></strong>
+    </div>
+  </div>
+
+ <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>
+        window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+    </script>
+    <script src="../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <script>
+        feather.replace()
+    </script>
+
+    <!-- Graphs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+
+</body>
+
+
+</html>
